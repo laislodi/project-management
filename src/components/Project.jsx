@@ -1,6 +1,7 @@
 
 import { FormattedDate } from "./text/FormattedDate";
 import { H1, H3 } from "./text/Headers";
+import Tasks from "./Tasks";
 import { CloseIconButton, DeleteIconButton } from "./buttons/IconButton";
 
 export default function Project({project, onClose, onDelete}) {
@@ -17,7 +18,7 @@ export default function Project({project, onClose, onDelete}) {
         <H3>Due Date: <FormattedDate date={project.dueDate}/></H3>
         <p className="text-md my-1 whitespace-pre-wrap">{project.description}</p>
       </header>
-      <H2>TASKS</H2>
+      <Tasks tasks={project.tasks} />
     </div>
   );
 };
