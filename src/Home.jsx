@@ -91,10 +91,7 @@ export default function Home() {
       className="w-[100vw] min-h-[100vh]
         bg-slate-200 text-slate-800
         dark:bg-slate-700 dark:text-slate-100">
-      <ProjectMenu
-        onSelectProject={handleSelectProject}
-        onStartAddProject={handleStartAddProject}
-      />
+      <ProjectMenu />
       {content}
     </ProjectsContext.Provider>
   );
