@@ -6,7 +6,7 @@ import { CloseIconButton, DeleteIconButton } from "./buttons/IconButton";
 import { ProjectsContext } from "../store/project-management-context";
 
 
-export default function Project({ onClose, onDelete }) {
+export default function Project() {
   return (
     <ProjectsContext.Consumer>
       {(projectsContext) => {
@@ -18,8 +18,8 @@ export default function Project({ onClose, onDelete }) {
               <div className="flex w-full justify-between items-center">
                 <H1>{currentProject.title}</H1>
                 <div>
-                  <DeleteIconButton helpText={"Delete Project"} onDelete={onDelete}/>
-                  <CloseIconButton onClose={onClose} />
+                  <DeleteIconButton helpText={"Delete Project"} onDelete={projectsContext.onDelete}/>
+                  <CloseIconButton onClose={projectsContext.onClose} />
                 </div>
               </div>
               <H3>Due Date: <FormattedDate date={currentProject.dueDate}/></H3>

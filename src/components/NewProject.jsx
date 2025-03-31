@@ -1,17 +1,19 @@
-import { useRef } from "react";
+import { useContext, useRef } from "react";
 import PrimaryButton from "./buttons/PrimaryButton.jsx";
 import SecondaryButton from "./buttons/SecondaryButton.jsx";
 import Modal from "./modal/Modal.jsx";
 import Paragraph from "./text/Paragraph.jsx";
 import { H2 } from "./text/Headers.jsx";
 import InputText from "./input/InputText.jsx";
+import { ProjectsContext } from "../store/project-management-context.jsx";
 
 
-function NewProject({ onAdd, onCancel }) {
+function NewProject() {
   const modal = useRef();
   const title = useRef();
   const description = useRef();
   const dueDate = useRef();
+  const { onAdd, onCancel } = useContext(ProjectsContext);
 
   function handleSave() {
     const enteredTitle = title.current.value;

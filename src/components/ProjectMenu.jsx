@@ -15,7 +15,7 @@ import PrimaryButton from "./buttons/PrimaryButton";
 import { ProjectsContext } from "../store/project-management-context";
 
 
-function ProjectMenu({ onSelectProject, onStartAddProject }) {
+function ProjectMenu() {
   return (
     <ProjectsContext.Consumer>
       {(projectsCtx) => {
@@ -28,7 +28,7 @@ function ProjectMenu({ onSelectProject, onStartAddProject }) {
               Your Projects
             </h2>
             <div>
-              <PrimaryButton onClick={onStartAddProject}>
+              <PrimaryButton onClick={projectsCtx.onStartAddProject}>
                 + Add Project
               </PrimaryButton>
             </div>
@@ -45,7 +45,7 @@ function ProjectMenu({ onSelectProject, onStartAddProject }) {
 
                 return <li key={`${project.id}_${project.title}`} >
                   <Button
-                    onClick={() => onSelectProject(project.id)}
+                    onClick={() => projectsCtx.onSelectProject(project.id)}
                     className={cssClasses}>
                     {project.title}
                   </Button>

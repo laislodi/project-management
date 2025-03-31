@@ -52,7 +52,7 @@ export default function Home() {
       id: v4()
     };
     setProjectState(prevState => ({
-      ...prevState,
+      selectedProjectId: newProject.id,
       projects: [...prevState.projects, newProject ],
       action: ACTION.SELECTED
     }));
@@ -66,22 +66,28 @@ export default function Home() {
     }));
   };
 
-  let content = <NoProjectSelected onStartAddProject={handleStartAddProject} />;
+  let content = <NoProjectSelected />;
   if (projectState.action === ACTION.ADDING) {
-    content = <NewProject
-                onAdd={handleAddProject}
-                onCancel={handleCancelingAddProject} 
-              />
+    content = <NewProject />
   } else if (projectState.action === ACTION.SELECTED) {
-    content = <Project
-          onClose={handleCloseProject}
-          onDelete={handleDeleteProject}
-    />
+    content = <Project />
   }
+
+  const projectsContext = {
+    projects: projectState.projects,
+    selectedProjectId: projectState.selectedProjectId,
+    action: projectState.action,
+    onStartAddProject: handleStartAddProject,
+    onSelectProject: handleSelectProject,
+    onClose: handleCloseProject,
+    onDelete: handleDeleteProject,
+    onAdd: handleAddProject,
+    onCancel: handleCancelingAddProject,
+  };
 
   return (
     <ProjectsContext.Provider
-      value={projectState}
+      value={projectsContext}
       className="w-[100vw] min-h-[100vh]
         bg-slate-200 text-slate-800
         dark:bg-slate-700 dark:text-slate-100">
