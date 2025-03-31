@@ -3,7 +3,7 @@ import CheckBoxTask from "./input/CheckBoxTask.jsx";
 import { H2 } from "./text/Headers.jsx";
 import InputText from "./input/InputText.jsx";
 import { CloseIconButton, ConfirmIconButton, PlusIconButton } from "./buttons/IconButton";
-import { STATUS } from "../store/project-management-context.jsx";
+import { TASK_STATUS } from "../store/project-management-context.jsx";
 import { v4 } from "uuid";
 
 export default function Tasks({ tasks }) {
@@ -18,7 +18,7 @@ export default function Tasks({ tasks }) {
     tasks.push({
       id: v4(),
       description: taskDescription,
-      status: STATUS.IN_PROGRESS
+      status: TASK_STATUS.IN_PROGRESS
     });
     setAddingTask(false);
   }
@@ -33,7 +33,7 @@ export default function Tasks({ tasks }) {
   
   function onCompleted(taskId) {
     const currentTask = tasks.filter(task => task.id === taskId);
-    currentTask.status = STATUS.COMPLETED;
+    currentTask.status = TASK_STATUS.COMPLETED;
   };
   
   return <section className="w-full bg-slate-300 dark:bg-slate-600 m-2 py-2 px-3 rounded-md">

@@ -1,7 +1,7 @@
 import { createContext } from "react";
 import { v4 } from "uuid";
 
-export const STATUS = {
+export const TASK_STATUS = {
   COMPLETED: "completed",
   IN_PROGRESS: "in progress"
 }
@@ -26,17 +26,17 @@ export const ProjectsContext = createContext(
           {
             id: "3edc-4rfv",
             description: "Learn the basics",
-            status: STATUS.COMPLETED
+            status: TASK_STATUS.COMPLETED
           },
           {
             id: "5tgb-6yhn",
             description: "Learn useEffect and useRef",
-            status: STATUS.IN_PROGRESS
+            status: TASK_STATUS.IN_PROGRESS
           },
           {
             id: "7ujm-8ikm",
             description: "Build a project on my own",
-            status: STATUS.IN_PROGRESS
+            status: TASK_STATUS.IN_PROGRESS
           }
         ]
       },
@@ -49,17 +49,17 @@ export const ProjectsContext = createContext(
           {
             id: "3e4r-dcfv",
             description: "Master the basics",
-            status: STATUS.COMPLETED
+            status: TASK_STATUS.COMPLETED
           },
           {
             id: "5t6y-gbhn",
             description: "Master useEffect and useRef",
-            status: STATUS.IN_PROGRESS
+            status: TASK_STATUS.IN_PROGRESS
           },
           {
             id: "7u8i-jmkm",
             description: "Build a new and more complex project on my own",
-            status: STATUS.IN_PROGRESS
+            status: TASK_STATUS.IN_PROGRESS
           }
         ]
       },
@@ -70,6 +70,12 @@ export const ProjectsContext = createContext(
         description: "Be a React expert!",
         tasks: []
       }
-    ]
+    ],
+    onStartAddProject: () => {},
+    onSelectProject: () => {},
+    onClose: () => {},
+    onDelete: () => {},
+    onAdd: () => {},
+    onCancel: () => {},
   }
 );

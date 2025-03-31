@@ -1,5 +1,5 @@
-import { useState } from "react";
-import { STATUS } from "../../Home.jsx";
+import { useId, useState } from "react";
+import { TASK_STATUS } from "../../store/project-management-context";
 
 export default function CheckBoxTask({ task, onCompleted, ...props }) {
   const styles = `size-4 p-2 my-1 mx-2 rounded border-2 border-b-4 border-stone-400
@@ -7,7 +7,7 @@ export default function CheckBoxTask({ task, onCompleted, ...props }) {
       accent-violet-300 hover:accent-violet-500 dark:accent-violet-500 hover:accent-violet-700`;
   
   const status = task.status;
-  const [ isSelected, setIsSelected ] = useState(status === STATUS.COMPLETED);
+  const [ isSelected, setIsSelected ] = useState(status === TASK_STATUS.COMPLETED);
   
   function onChange() {
     if (isSelected) {
@@ -17,10 +17,10 @@ export default function CheckBoxTask({ task, onCompleted, ...props }) {
     setIsSelected(clicked => {
       return !clicked;
     });
-    task.status = STATUS.COMPLETED;
+    task.status = TASK_STATUS.COMPLETED;
   };
 
-  const checkboxId = task.description.replace(" ", "-");
+  const checkboxId = useId();
 
   return <div className="flex justify-start items-start font-momo">
     <input {...props}
