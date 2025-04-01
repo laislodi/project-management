@@ -1,4 +1,5 @@
-import { createContext } from "react";
+import { createContext, useContext, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { v4 } from "uuid";
 
 export const TASK_STATUS = {
@@ -14,8 +15,6 @@ export const ACTION = {
 
 export const ProjectsContext = createContext(
   {
-    selectedProjectId: undefined,
-    action: ACTION.NOT_SELECTED,
     projects: [
       {
         id: v4(),
@@ -71,11 +70,44 @@ export const ProjectsContext = createContext(
         tasks: []
       }
     ],
-    onStartAddProject: () => {},
-    onSelectProject: () => {},
-    onClose: () => {},
     onDelete: () => {},
     onAdd: () => {},
-    onCancel: () => {},
   }
 );
+
+export default function ProjectsContextProvider({ children }) {
+  const context = useContext(ProjectsContext);
+  const [ projects, setProjects ] = useState(context.projects);
+  const navigate = useNavigate();
+
+  function handleDeleteProject(id) {
+    const filteredProjects = context.projects.filter(project => project.id !== id);
+    setProjects([...filteredProjects]);
+    navigate("/");
+  }
+
+  function handleAddProject(projectData) {
+    const newProject = {
+      ...projectData,
+      id: v4()
+    };
+    setProjects([...projects, newProject ]);
+    navigate(`/${newProject.id}`);
+  };
+
+  const projectsContext = {
+    projects: projects,
+    onDelete: handleDeleteProject,
+    onAdd: handleAddProject,
+  };
+
+  return (
+    <ProjectsContext.Provider
+        value={projectsContext}
+        className="w-[100vw] min-h-[100vh]
+          bg-slate-200 text-slate-800
+          dark:bg-slate-700 dark:text-slate-100">
+            {children}
+    </ProjectsContext.Provider>
+  )
+};

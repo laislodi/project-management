@@ -6,6 +6,7 @@ import Paragraph from "./text/Paragraph.jsx";
 import { H2 } from "./text/Headers.jsx";
 import InputText from "./input/InputText.jsx";
 import { ProjectsContext } from "../store/project-management-context.jsx";
+import { Link } from "react-router-dom";
 
 
 function NewProject() {
@@ -13,7 +14,7 @@ function NewProject() {
   const title = useRef();
   const description = useRef();
   const dueDate = useRef();
-  const { onAdd, onCancel } = useContext(ProjectsContext);
+  const { onAdd } = useContext(ProjectsContext);
 
   function handleSave() {
     const enteredTitle = title.current.value;
@@ -42,9 +43,11 @@ function NewProject() {
     <div className="flex-row mx-4 w-2/3">
       <menu className="flex justify-end gap-8 font-bold my-4">
         <li>
-          <SecondaryButton onClick={onCancel}>
-            Cancel
-          </SecondaryButton>
+          <Link to="/">
+            <SecondaryButton >
+              Cancel
+            </SecondaryButton>
+          </Link>
         </li>
         <li>
           <PrimaryButton onClick={handleSave}>
