@@ -103,10 +103,7 @@ export default function ProjectsContextProvider({ children }) {
 
   return (
     <ProjectsContext.Provider
-        value={projectsContext}
-        className="w-[100vw] min-h-[100vh]
-          bg-slate-200 text-slate-800
-          dark:bg-slate-700 dark:text-slate-100">
+        value={projectsContext}>
             {children}
     </ProjectsContext.Provider>
   )
