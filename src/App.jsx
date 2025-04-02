@@ -9,10 +9,10 @@ function App() {
   return (
     <BrowserRouter>
       <Routes>
-        <Route path="/" element={<Layout />} >
+        <Route path="/project-management" element={<Layout />} >
           <Route index element={<NoProjectSelected />} />
-          <Route path="/new" element={<NewProject />} />
-          <Route path="/:id" element={<Project />} />
+          <Route path="/project-management/new" element={<NewProject />} />
+          <Route path="/project-management/:id" element={<Project />} />
         </Route>
         <Route path="/*" element={<ProjectNotFound />} />
       </Routes>
