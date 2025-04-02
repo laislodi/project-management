@@ -11,7 +11,7 @@ export default function NoProjectSelected() {
     <H2>No Project Selected</H2>
     <Paragraph>Selecte a project or get started with a new one.</Paragraph>
     <p className="mt-8">
-      <Link to="/new" >
+      <Link to="/project-management/new" >
         <PrimaryButton>Create a new Project.</PrimaryButton>
       </Link>
     </p>

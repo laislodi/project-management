@@ -43,7 +43,7 @@ function NewProject() {
     <div className="flex-row mx-4 w-2/3">
       <menu className="flex justify-end gap-8 font-bold my-4">
         <li>
-          <Link to="/">
+          <Link to="/project-management">
             <SecondaryButton >
               Cancel
             </SecondaryButton>

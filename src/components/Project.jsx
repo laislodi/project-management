@@ -25,7 +25,7 @@ export default function Project() {
                 <H1>{currentProject.title}</H1>
                 <div>
                   <DeleteIconButton helpText={"Delete Project"} onDelete={() => projectsContext.onDelete(param.id)}/>
-                  <Link to="/">
+                  <Link to="/project-management">
                     <CloseIconButton />
                   </Link>
                 </div>

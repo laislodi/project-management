@@ -15,10 +15,10 @@ function ProjectMenu() {
               bg-slate-400 dark:bg-slate-900
               rounded-r-lg px-6 py-8 ">
             <h2 className="text-stone-900 dark:text-stone-50 md:text-2xl font-bold uppercase mb-4">
-              <Link to="/">All Projects</Link>
+              <Link to="/project-management">All Projects</Link>
             </h2>
             <div>
-              <Link to="/new" >
+              <Link to="/project-management/new" >
                 <PrimaryButton>
                   + Add Project
                 </PrimaryButton>
@@ -36,7 +36,7 @@ function ProjectMenu() {
                 }
 
                 return <li key={`${project.id}_${project.title}`} >
-                  <Link to={`/${project.id}`} >
+                  <Link to={`/project-management/${project.id}`} >
                     <Button
                       className={cssClasses}>
                       {project.title}
