@@ -83,7 +83,7 @@ export default function ProjectsContextProvider({ children }) {
   function handleDeleteProject(id) {
     const filteredProjects = context.projects.filter(project => project.id !== id);
     setProjects([...filteredProjects]);
-    navigate("/");
+    navigate("/project-management");
   }
 
   function handleAddProject(projectData) {
@@ -92,7 +92,7 @@ export default function ProjectsContextProvider({ children }) {
       id: v4()
     };
     setProjects([...projects, newProject ]);
-    navigate(`/${newProject.id}`);
+    navigate(`/project-management/${newProject.id}`);
   };
 
   const projectsContext = {
