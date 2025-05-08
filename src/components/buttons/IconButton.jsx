@@ -77,9 +77,9 @@ export function DeleteIconButton({ onDelete, helpText }) {
     setModalIsOpen(true);
   }
 
-  function onClose() {
+  const onClose = useCallback(() => {
     setModalIsOpen(false);
-  }
+  }, []);
 
   return (
     <>

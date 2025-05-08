@@ -1,4 +1,4 @@
-import { useContext, useRef, useState } from "react";
+import { useCallback, useContext, useRef, useState } from "react";
 import PrimaryButton from "./buttons/PrimaryButton.jsx";
 import SecondaryButton from "./buttons/SecondaryButton.jsx";
 import Modal from "./modal/Modal.jsx";
@@ -34,9 +34,9 @@ function NewProject() {
     })
   }
 
-  function handleClose() {
+  const handleClose = useCallback(() => {
     setOpenModal(false);
-  }
+  }, []);
 
   return <>
     <Modal open={openModal} handleClose={handleClose} >
