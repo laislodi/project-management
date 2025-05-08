@@ -1,17 +1,27 @@
-import { forwardRef, useImperativeHandle, useRef } from "react";
+import { useEffect, useRef } from "react";
 import { createPortal } from "react-dom";
 import SecondaryButton from "../buttons/SecondaryButton.jsx";
 import PrimaryButton from "../buttons/PrimaryButton.jsx";
 
-const OptionModal = forwardRef(function OptionModal({ children, positive, negative, onPositive, onNegative }, ref) {
+function OptionModal({ children, onPositive, onNegative, isOpen, positive="Yes", negative="No" }) {
   const dialog = useRef();
-  useImperativeHandle(ref, () => {
-    return {
-      open() {
-        dialog.current.showModal()
+  useEffect(() => {
+    const handleKeyDown = (event) => {
+      if (event.key === 'Escape') {
+        onNegative();
       }
+    };
+
+    if (isOpen) {
+      dialog.current.showModal();
+      window.addEventListener('keydown', handleKeyDown);
+    } else {
+      dialog.current.close();
     }
-  });
+    return () => {
+      window.removeEventListener('keydown', handleKeyDown);
+    };
+  }, [isOpen, onNegative]);
   
   return createPortal(
     <dialog
@@ -28,6 +38,6 @@ const OptionModal = forwardRef(function OptionModal({ children, positive, negati
     </dialog>,
     document.getElementById("modal-root") ?? document.body
   );
-});
+};
 
 export default OptionModal;

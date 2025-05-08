@@ -1,4 +1,4 @@
-import { useRef } from "react";
+import { useState } from "react";
 import Button from "./Button.jsx";
 import OptionModal from "../modal/OptionModal.jsx"
 import { H2 } from "../text/Headers.jsx";
@@ -71,15 +71,19 @@ export function PlusIconButton({ onAdd }) {
 export function DeleteIconButton({ onDelete, helpText }) {
   const style = `bg-red-500 text-stone-100 hover:bg-red-600
                 dark:bg-red-700 dark:text-stone-300 dark:hover:bg-red-800 `;
-  const modal = useRef();
+  const [ modalIsOpen, setModalIsOpen ] = useState(false);
 
   function handleDelete() {
-    modal.current.open();
+    setModalIsOpen(true);
+  }
+
+  function onClose() {
+    setModalIsOpen(false);
   }
 
   return (
     <>
-      <OptionModal ref={modal} positive="Delete" negative="Back" onPositive={onDelete}>
+      <OptionModal onPositive={onDelete} onNegative={onClose} isOpen={modalIsOpen}>
         <H2>Are you sure you want to delete this project?</H2>
         <Paragraph>Once you delete this project, you can't get it back!</Paragraph>
       </OptionModal>

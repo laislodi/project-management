@@ -1,4 +1,4 @@
-import { useContext, useRef } from "react";
+import { useContext, useRef, useState } from "react";
 import PrimaryButton from "./buttons/PrimaryButton.jsx";
 import SecondaryButton from "./buttons/SecondaryButton.jsx";
 import Modal from "./modal/Modal.jsx";
@@ -10,7 +10,7 @@ import { Link } from "react-router-dom";
 
 
 function NewProject() {
-  const modal = useRef();
+  const [ openModal, setOpenModal ] = useState(false);
   const title = useRef();
   const description = useRef();
   const dueDate = useRef();
@@ -22,7 +22,7 @@ function NewProject() {
     const enteredDueDate = dueDate.current.value;
 
     if (enteredTitle.trim() === "" || enteredDescriptions.trim() === "" || enteredDueDate.trim() === "") {
-      modal.current.open();
+      setOpenModal(true);
       return;
     }
     
@@ -34,8 +34,12 @@ function NewProject() {
     })
   }
 
+  function handleClose() {
+    setOpenModal(false);
+  }
+
   return <>
-    <Modal ref={modal} >
+    <Modal open={openModal} handleClose={handleClose} >
       <H2>Invalid Input</H2>
       <Paragraph>Oops... Looks like you forgot to enter a value.</Paragraph>
       <Paragraph>Please make sure you provide a valid value for every input field.</Paragraph>

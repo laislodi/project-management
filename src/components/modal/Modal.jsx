@@ -1,16 +1,28 @@
-import { forwardRef, useImperativeHandle, useRef } from "react";
+import { useEffect, useRef } from "react";
 import { createPortal } from "react-dom";
 import SecondaryButton from "../buttons/SecondaryButton.jsx";
 
-const Modal = forwardRef(function Modal({ children }, ref) {
+function Modal({ open, handleClose, children }) {
   const dialog = useRef();
-  useImperativeHandle(ref, () => {
-    return {
-      open() {
-        dialog.current.showModal()
+
+  useEffect(() => {
+    const handleKeyDown = (event) => {
+      if (event.key === 'Escape') {
+        handleClose();
       }
+    };
+
+    if (open) {
+      dialog.current.showModal();
+      window.addEventListener('keydown', handleKeyDown);
+    } else {
+      dialog.current.close();
     }
-  });
+    
+    return () => {
+      window.removeEventListener('keydown', handleKeyDown);
+    };
+  }, [open, handleClose]);
   
   return createPortal(
     <dialog
@@ -21,11 +33,11 @@ const Modal = forwardRef(function Modal({ children }, ref) {
     >
       {children}
       <form method="dialog" className="mt-4 text-center">
-        <SecondaryButton>Close</SecondaryButton>
+        <SecondaryButton onClick={handleClose}>Close</SecondaryButton>
       </form>
     </dialog>,
     document.getElementById("modal-root") ?? document.body
   );
-});
+};
 
 export default Modal;
